@@ -1,12 +1,10 @@
 #!/bin/sh
 export TURTLEBOT_GAZEBO_WORLD_FILE=$(rospack find my_robot)/worlds/NewAppartment.world
 
+terminator -e "roslaunch turtlebot_gazebo turtlebot_world.launch" &
 sleep 5
-
-terminator -e "source devel/setup.bash; roslaunch my_robot world.launch" &
+terminator -e "roslaunch turtlebot_gazebo gmapping_demo.launch" &
+sleep 2
+terminator -e "roslaunch turtlebot_rviz_launchers view_navigation.launch" &
 sleep 5
-terminator -e "source devel/setup.bash; roslaunch turtlebot_gazebo gmapping_demo.launch" &
-sleep 5
-terminator -e "source devel/setup.bash; roslaunch turtlebot_rviz_launchers view_navigation.launch" &
-sleep 5
-terminator -e "source devel/setup.bash; roslaunch turtlebot_teleop keyboard_teleop.launch"
+terminator -e "roslaunch turtlebot_teleop keyboard_teleop.launch"
