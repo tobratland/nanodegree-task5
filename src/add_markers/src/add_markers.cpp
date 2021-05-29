@@ -12,6 +12,7 @@ public:
     marker_pub_ = n_.advertise<visualization_msgs::Marker>("visualization_marker", 1);
     marker_pos_pub_ = n_.advertise<geometry_msgs::Point>("marker_position", 1);
     odomSub = n_.subscribe("/amcl_pose", 15, &AddMarkers::handlePose, this);
+    distanceTolerance = 0.25;
 
     initializePosiblePositions();
     createMarker();
@@ -109,7 +110,6 @@ private:
     pos0.z = 0.1;
     posibilities.push_back(pos0);
 
-    distanceTolerance = 1.0;
     geometry_msgs::Point pos1;
     pos1.x = 4.5;
     pos1.y = 6.0;
@@ -117,26 +117,26 @@ private:
     posibilities.push_back(pos1);
 
     geometry_msgs::Point pos2;
-    pos2.x = -1.0;
-    pos2.y = 6.2;
+    pos2.x = 4.23;
+    pos2.y = 4.78;
     pos2.z = 0.1;
     posibilities.push_back(pos2);
 
     geometry_msgs::Point pos3;
-    pos3.x = 4.5;
-    pos3.y = -1.91;
+    pos3.x = 1.9;
+    pos3.y = 5.48;
     pos3.z = 0.1;
     posibilities.push_back(pos3);
 
     geometry_msgs::Point pos4;
-    pos4.x = 4.17;
-    pos4.y = 5.77;
+    pos4.x = -0.07;
+    pos4.y = 4.49;
     pos4.z = 0.1;
     posibilities.push_back(pos4);
     
     geometry_msgs::Point pos5;
-    pos5.x = -0.09;
-    pos5.y = 4.537;
+    pos5.x = 3.75;
+    pos5.y = -1.26;
     pos5.z = 0.1;
     posibilities.push_back(pos5);
 
