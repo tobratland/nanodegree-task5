@@ -43,8 +43,14 @@ private:
   geometry_msgs::Point currentPoint;
   ros::Subscriber odomSub;
 
+  struct Point {
+    float x, y, z; 
+  };
+
   void handlePose(const geometry_msgs::PoseWithCovarianceStamped &msg)
   {
+    Point markerPos{marker.pose.position.x, marker.pose.position.y, marker.pose.position.z};
+    Point posePos{msg.pose.pose.position.x, msg.pose.pose.position.y, msg.pose.pose.position.z};
     if (!firstMarkerPlaced)
     {
       ROS_INFO_ONCE("FIRST MARKER NOT PLACED!");
@@ -53,7 +59,7 @@ private:
 
     if (!markerPickedUp && !markerPutDown)
     {
-      if (distance(marker.pose.position.x, marker.pose.position.y, marker.pose.position.z, msg.pose.pose.position.x, msg.pose.pose.position.y, msg.pose.pose.position.z) <= distanceTolerance)
+      if (distance(markerPos, posePos) <= distanceTolerance)
       {
         marker.action = visualization_msgs::Marker::DELETE;
         setMarkerPositionRandom();
@@ -69,7 +75,7 @@ private:
     }
     if (markerPickedUp && !markerPutDown)
     {
-      if (distance(marker.pose.position.x, marker.pose.position.y, marker.pose.position.z, msg.pose.pose.position.x, msg.pose.pose.position.y, msg.pose.pose.position.z) <= distanceTolerance)
+      if (distance(markerPos, posePos) <= distanceTolerance)
       {
         marker.action = visualization_msgs::Marker::ADD;
         placeMarker();
@@ -80,11 +86,9 @@ private:
     }
   }
 
-  float distance(float x1, float y1,
-                 float z1, float x2,
-                 float y2, float z2)
-  {
-    return std::sqrt(std::pow(x2 - x1, 2) + std::pow(y2 - y1, 2) + std::pow(z2 - z1, 2) * 1.0);
+
+  float distance(Point point1, Point point2) {
+    return std::sqrt(std::pow(point2.x - point1.x, 2) + std::pow(point2.y - point1.y, 2) + std::pow(point2.z - point1.z , 2) * 1.0);
   }
 
   void placeMarker()
