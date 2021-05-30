@@ -7,7 +7,9 @@ This robot will pick up a object from one of five random places in my awesome ne
 1. Clone the repository
 2. Use the command `git submodule init` from the `src` folder
 2. Use the command `git submodule update` from the `src` folder
-3. Run one of the shellscripts in src/shellscripts(The home_service.sh is the script to run the complete package.)
+3. Use the command `catkin_make` from the top folder
+4. Use the command `source devel/setup.sh` from the top folder
+5. Run one of the shellscripts in src/shellscripts(The home_service.sh is the script to run the complete package.)
 
 
 ![Home service robot](https://github.com/tobratland/nanodegree-task5/blob/main/images/home_service5.png)
