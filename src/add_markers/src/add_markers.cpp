@@ -49,8 +49,16 @@ private:
 
   void handlePose(const geometry_msgs::PoseWithCovarianceStamped &msg)
   {
-    Point markerPos{marker.pose.position.x, marker.pose.position.y, marker.pose.position.z};
-    Point posePos{msg.pose.pose.position.x, msg.pose.pose.position.y, msg.pose.pose.position.z};
+    geometry_msgs::Point markerPos;
+    markerPos.x = marker.pose.position.x;
+    markerPos.y = marker.pose.position.y;
+    markerPos.z = marker.pose.position.z;
+
+    geometry_msgs::Point posePos;
+    posePos.x = msg.pose.pose.position.x;
+    posePos.y = msg.pose.pose.position.y;
+    posePos.z = msg.pose.pose.position.z;
+
     if (!firstMarkerPlaced)
     {
       ROS_INFO_ONCE("FIRST MARKER NOT PLACED!");
@@ -87,7 +95,7 @@ private:
   }
 
 
-  float distance(Point point1, Point point2) {
+  float distance(geometry_msgs::Point point1, geometry_msgs::Point point2) {
     return std::sqrt(std::pow(point2.x - point1.x, 2) + std::pow(point2.y - point1.y, 2) + std::pow(point2.z - point1.z , 2) * 1.0);
   }
 

@@ -208,3 +208,7 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 add_executable(add_markers src/add_markers.cpp)
 target_link_libraries(add_markers ${catkin_LIBRARIES})
 add_dependencies(add_markers ${${nanodegree-task5}_EXPORTED_TARGETS}${catkin_EXPORTED_TARGETS})
+
+add_executable(add_markers_timed src/add_markers_timed.cpp)
+target_link_libraries(add_markers_timed ${catkin_LIBRARIES})
+add_dependencies(add_markers_timed ${${nanodegree-task5}_EXPORTED_TARGETS}${catkin_EXPORTED_TARGETS})
