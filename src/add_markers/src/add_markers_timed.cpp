@@ -20,9 +20,7 @@ public:
 
   void replaceMarker()
   {
-    marker.action = visualization_msgs::Marker::DELETE;
     marker_pub_.publish(marker);
-    marker.action = visualization_msgs::Marker::ADD;
     setMarkerPositionRandom();
     placeMarker();
     marker_pub_.publish(marker);
@@ -57,8 +55,8 @@ private:
     posibilities.push_back(pos0);
 
     geometry_msgs::Point pos1;
-    pos1.x = 4.5;
-    pos1.y = 6.0;
+    pos1.x = -0.07;
+    pos1.y = 4.49;
     pos1.z = 0.1;
     posibilities.push_back(pos1);
   }
